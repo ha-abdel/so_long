@@ -6,9 +6,11 @@ int check_map_length(char **map)
 {
     int len;
     int i = 0;
+    // t_window window;
     if(!map || !*map)
         return 0;
     len = ft_strlen(map[0]);
+    // window.width
     while (map[i])
     {
         if(ft_strlen(map[i]) != len)
@@ -18,7 +20,7 @@ int check_map_length(char **map)
     return 1;
 }
 
-int check_map_walls(char **map)
+int check_map_walls(char **map, t_validation_infos *info)
 {
     int len;
     int map_len;
@@ -29,6 +31,8 @@ int check_map_walls(char **map)
     len = ft_strlen(*map);
     while (map[map_len])
         map_len++;
+    info->width = len;
+    info->height = map_len;
     if(!ft_check_helper(map, len, map_len))
         return 0;
     return 1;
@@ -64,24 +68,18 @@ void check_map_elements(char **map, t_validation_infos *info)
 }
 
 
-int check_map(char **test_map)
+int check_map(char **test_map, t_validation_infos *info)
 {
-    t_validation_infos info;
     int x;
     int y;
 
     y = 0;
-    info.count_coin = 0;
-    info.count_exit = 0;
-    info.count_Player = 0;
-    if(!check_map_length(test_map))
+    if(!check_map_length(test_map) || !check_map_walls(test_map, info))
         return 0;
-    if(!check_map_walls(test_map))
+    check_map_elements(test_map, info);
+    if(info->count_Player != 1 || info->count_exit != 1 || info->count_coin <1)
         return 0;
-    check_map_elements(test_map, &info);
-    if(info.count_Player != 1 || info.count_exit != 1 || info.count_coin <1)
-        return 0;
-    flood_fill(test_map, info.px, info.py);
+    flood_fill(test_map, info->px, info->py);
     while (test_map[y])
     {
         x = 0;

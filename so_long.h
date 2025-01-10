@@ -11,7 +11,7 @@
 #include <mlx.h>
 #include <math.h>
 
-typedef struct s_image
+typedef struct s_sprite
 {
     void    *img;
     int     width;
@@ -20,11 +20,11 @@ typedef struct s_image
     int     bpp;
     int     line_len;
     int     endian;
-} t_image;
+} t_sprite;
 
 typedef struct s_player
 {
-    t_image    *player;
+    t_sprite    *player;
     int         player_x;
     int         player_y;
 
@@ -32,7 +32,7 @@ typedef struct s_player
 
 typedef struct s_coin
 {
-    t_image    *coin;
+    t_sprite    *coin;
     int         coin_x;
     int         coin_y;
 } t_coin;
@@ -41,16 +41,26 @@ typedef struct s_data
 {
     void    *mlx;
     void    *win;
-    char    *map_file;
     char    **map;
     int     width;
     int     height;
-    t_player player;
+    int     count_coins;
+    // t_player player;
     // int     player_x;
     // int     player_y;
-    t_image img;
 } t_data;
 
+// typedef struct s_window
+// {
+//     int width;
+//     int height;
+// } t_window;
+// typedef struct s_sprite
+// {
+//     t_sprite     img;
+//     int         x;
+//     int         y;
+// } t_sprite;
 typedef struct s_validation_infos
 {
     int count_Player;
@@ -58,18 +68,23 @@ typedef struct s_validation_infos
     int count_exit;
     int px;
     int py;
+    int width;
+    int height;
 } t_validation_infos;
 
 
 #define WIN_W 2000
 #define WIN_H 2000
 
+// check map functions prototypes
 char **get_map(char *file_path);
-int get_map_h(char *file_path);
+int get_map_len(char *file_path);
 int ft_check_helper(char **map, int len, int map_len);
 char **get_map(char *file_path);
-int get_map_h(char *file_path);
 void flood_fill(char **test_map, int x, int y);
-int check_map(char **test_map);
+int check_map(char **test_map, t_validation_infos *info);
+char **dup_map(char **map);
+void print_map(char **s);
+
 
 #endif

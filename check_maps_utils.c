@@ -36,7 +36,7 @@ char **get_map(char *file_path)
     int i;
     int len;
     int fd;
-    map = malloc((get_map_h(file_path) + 1) * sizeof(char *));
+    map = malloc((get_map_len(file_path) + 1) * sizeof(char *));
     fd = open(file_path, O_RDWR);
     i = 0;
     line = get_next_line(fd);
@@ -52,7 +52,7 @@ char **get_map(char *file_path)
     return map;
 }
 
-int get_map_h(char *file_path)
+int get_map_len(char *file_path)
 {
     int h = 0;
     char *line;
@@ -68,14 +68,57 @@ int get_map_h(char *file_path)
     return h;
 }
 
+char **dup_map(char **map)
+{
+    int len;
+    int i;
+    char **newmap;
+
+    len = 0;
+    i = 0;
+    if(!map || !*map)
+        return NULL;
+    while (map[len])
+    {
+        len++;
+    }
+    newmap = malloc(sizeof(char *) * len + 1);
+    if(!newmap)
+        return NULL;
+    while (map[i])
+    {
+        newmap[i] = ft_strdup(map[i]);
+        i++;
+    }
+    newmap[i] = NULL;
+    return newmap;
+}
+
+void print_map(char **s)
+{
+    int x = 0;
+    while (s[x])
+    {
+        printf("%s", s[x]);
+        x++;
+    }
+    printf("\n\n");
+}
+
 void flood_fill(char **test_map, int x, int y)
 {
     if(x < 0 || y < 0 || test_map[y] == NULL || test_map[y][x] == '\0'
         || test_map[y][x] == 'F' || test_map[y][x] == '1' )
             return;
     test_map[y][x] ='F';
+    //print_map(test_map);
     flood_fill(test_map, x + 1, y);
+    
     flood_fill(test_map, x - 1, y);
+ 
     flood_fill(test_map, x, y + 1);
+
     flood_fill(test_map, x, y - 1);
+   
+    
 }
