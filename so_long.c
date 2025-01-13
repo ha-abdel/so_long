@@ -39,6 +39,12 @@ void    initialize_sprites(t_data *data)
     data->exit.x = 0;
     data->exit.y = 0;
 
+    data->background.addr = NULL;
+    data->background.img = NULL;
+    data->background.width = data->width * 100;
+    data->background.height = data->height * 100;
+    data->background.x = 0;
+    data->background.y = 0;
     // data->background = {NULL, NULL, 100, 100, 0, 0};
 }
 
@@ -97,6 +103,7 @@ void initiallize_resources(t_data *data, t_validation_infos *info, char **test_m
     data->mlx = mlx_init();
     data->win = mlx_new_window(data->mlx, info->width * 100, info->height * 100, "so_long!");
     initialize_sprites(data);
+    init_images(data, info);
     // while (test_map[y])
     // {
     //     x = 0;
@@ -148,7 +155,28 @@ int handle_key_press(int keycode, t_data *data) {
 
 void    init_images(t_data *data, t_validation_infos *info)
 {
-    
+    data->player.img = mlx_xpm_file_to_image(data->mlx, "player.xpm", &data->player.width, &data->player.height);
+    data->player.addr = mlx_get_data_addr(data->player.img, &data->player.bpp, &data->player.line_len, &data->player.endian);
+
+    data->wall.img = mlx_xpm_file_to_image(data->mlx, "boxx.xpm", &data->wall.width, &data->wall.height);
+    data->wall.addr = mlx_get_data_addr(data->wall.img, &data->wall.bpp, &data->wall.line_len, &data->wall.endian);
+
+    data->floor.img = mlx_xpm_file_to_image(data->mlx, "floor.xpm", &data->floor.width, &data->floor.height);
+    data->floor.addr = mlx_get_data_addr(data->floor.img, &data->floor.bpp, &data->floor.line_len, &data->floor.endian);
+
+    data->coin.img = mlx_xpm_file_to_image(data->mlx, "money4.xpm", &data->coin.width, &data->coin.height);
+    data->coin.addr = mlx_get_data_addr(data->coin.img, &data->coin.bpp, &data->coin.line_len, &data->coin.endian);
+
+    data->exit.img = mlx_xpm_file_to_image(data->mlx, "exit.xpm", &data->exit.width, &data->exit.height);
+    data->exit.addr = mlx_get_data_addr(data->exit.img, &data->exit.bpp, &data->exit.line_len, &data->exit.endian);
+
+    data->exit.img = mlx_xpm_file_to_image(data->mlx, "floor.xpm", &data->exit.width, &data->exit.height);
+    data->exit.addr = mlx_get_data_addr(data->exit.img, &data->exit.bpp, &data->exit.line_len, &data->exit.endian);
+
+    data->background.img = mlx_xpm_file_to_image(data->mlx, "floor.xpm", &data->background.width, &data->background.height);
+    data->background.addr = mlx_get_data_addr(data->background.img, &data->background.bpp, &data->background.line_len, &data->background.endian);
+
+    // mlx_put_image_to_window(data->mlx, data->win, data->exit.img, 200, 200);
 }
 
 int main(int ac, char **av)
@@ -171,7 +199,6 @@ int main(int ac, char **av)
     test_map = dup_map(data.map);
     // print_map(test_map);
     initiallize_resources(&data, info, test_map);
-    init_images(data, info);
     // draw_player(&data, info, 200, 200);
     // draw_wall(&data, info, 400, 400);
     // draw_coin(&data, info, 500, 200);

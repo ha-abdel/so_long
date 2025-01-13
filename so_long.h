@@ -101,6 +101,7 @@ void draw_exit(t_data *data, t_validation_infos *info, int s_x, int s_y);
 void draw_coin(t_data *data, t_validation_infos *info, int s_x, int s_y);
 void draw_floor(t_data *data, t_validation_infos *info, int s_x, int s_y);
 void draw_wall(t_data *data, t_validation_infos *info, int s_x, int s_y);
+void    init_images(t_data *data, t_validation_infos *info);
 
 
 // void fill_fram(t_sprite *fram,t_sprite *sprite);
