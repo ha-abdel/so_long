@@ -87,7 +87,7 @@ char **dup_map(char **map)
         return NULL;
     while (map[i])
     {
-        newmap[i] = ft_strdup(map[i]);
+        newmap[i] = ft_strdup(ft_strtrim(map[i], "\n"));
         i++;
     }
     newmap[i] = NULL;
@@ -99,10 +99,10 @@ void print_map(char **s)
     int x = 0;
     while (s[x])
     {
-        printf("%s", s[x]);
+        printf("%s\n", s[x]);
         x++;
     }
-    printf("\n\n");
+    // printf("\n\n");
 }
 
 void flood_fill(char **test_map, int x, int y)

@@ -20,22 +20,24 @@ typedef struct s_sprite
     int     bpp;
     int     line_len;
     int     endian;
+    int     x;
+    int     y;
 } t_sprite;
 
-typedef struct s_player
-{
-    t_sprite    *player;
-    int         player_x;
-    int         player_y;
+// typedef struct s_player
+// {
+//     t_sprite    *player;
+//     int         player_x;
+//     int         player_y;
 
-} t_player;
+// } t_player;
 
-typedef struct s_coin
-{
-    t_sprite    *coin;
-    int         coin_x;
-    int         coin_y;
-} t_coin;
+// typedef struct s_coin
+// {
+//     t_sprite    *coin;
+//     int         coin_x;
+//     int         coin_y;
+// } t_coin;
 
 typedef struct s_data
 {
@@ -45,9 +47,12 @@ typedef struct s_data
     int     width;
     int     height;
     int     count_coins;
-    // t_player player;
-    // int     player_x;
-    // int     player_y;
+    t_sprite   player;
+    t_sprite    wall;
+    t_sprite    floor;
+    t_sprite    coin;
+    t_sprite    exit;
+    t_sprite    background;
 } t_data;
 
 // typedef struct s_window
@@ -87,4 +92,27 @@ char **dup_map(char **map);
 void print_map(char **s);
 
 
+
+
+// initialise functions
+void fill_fram(t_sprite *fram,t_sprite *sprite, t_sprite *bg);
+void draw_player(t_data *data, t_validation_infos *info, int s_x, int s_y);
+void draw_exit(t_data *data, t_validation_infos *info, int s_x, int s_y);
+void draw_coin(t_data *data, t_validation_infos *info, int s_x, int s_y);
+void draw_floor(t_data *data, t_validation_infos *info, int s_x, int s_y);
+void draw_wall(t_data *data, t_validation_infos *info, int s_x, int s_y);
+
+
+// void fill_fram(t_sprite *fram,t_sprite *sprite);
+unsigned int    get_color(t_sprite *img, int x, int y);
+void my_mlx_pixel_put(t_sprite *img,int x, int y,int color);
+
+
+
+// libft_functions
+
+size_t	ft_strlcpy(char *dst, char *src, size_t dstsize);
+char	*ft_strtrim(char *s1, char *set);
+char	*ft_strchr(char *s, int c);
+int	ft_strlen(char *s);
 #endif

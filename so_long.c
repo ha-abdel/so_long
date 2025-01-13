@@ -1,13 +1,125 @@
 #include "so_long.h"
 #include "get_next_line.h"
+#include <strings.h>
 
-void initiallize_resources(t_data *data, t_validation_infos *info)
+void    initialize_sprites(t_data *data)
 {
+    data->coin.addr = NULL;
+    data->coin.img = NULL;
+    data->coin.width = 100;
+    data->coin.height = 100;
+    data->coin.x = 0;
+    data->coin.y = 0;
+
+    data->player.addr = NULL;
+    data->player.img = NULL;
+    data->player.width = 100;
+    data->player.height = 100;
+    data->player.x = 0;
+    data->player.y = 0;
+
+    data->wall.addr = NULL;
+    data->wall.img = NULL;
+    data->wall.width = 100;
+    data->wall.height = 100;
+    data->wall.x = 0;
+    data->wall.y = 0;
+
+    data->floor.addr = NULL;
+    data->floor.img = NULL;
+    data->floor.width = 100;
+    data->floor.height = 100;
+    data->floor.x = 0;
+    data->floor.y = 0;
+
+    data->exit.addr = NULL;
+    data->exit.img = NULL;
+    data->exit.width = 100;
+    data->exit.height = 100;
+    data->exit.x = 0;
+    data->exit.y = 0;
+
+    // data->background = {NULL, NULL, 100, 100, 0, 0};
+}
+
+void render_frames(t_data *data, t_validation_infos *info, char **test_map)
+{
+    int x;
+    int y;
+
+    y = 0;
+    while (test_map[y])
+    {
+        x = 0;
+        while (test_map[y][x])
+        {
+            if(!ft_strchr("10PEC\n", test_map[y][x]))
+                return ;
+            else if(test_map[y][x] == 'P')
+                draw_player(data, info, x * 100, y * 100);
+            else if(test_map[y][x] == '1')
+                draw_wall(data, info, x * 100, y * 100);
+            else if(test_map[y][x] == 'E')
+                draw_exit(data, info, x * 100, y * 100);
+            else if(test_map[y][x] == 'C')
+                draw_coin(data, info, x * 100, y * 100);
+            else if (test_map[y][x] == '0')
+                draw_floor(data, info, x * 100, y * 100);   
+            x++;
+        }
+        y++;
+    }
+}
+
+void render_bg(t_data *data, t_validation_infos *info, char **test_map)
+{
+        int x;
+    int y;
+
+    y = 0;
+    while (test_map[y])
+    {
+        x = 0;
+        while (test_map[y][x])
+        {
+            draw_floor(data, info, x * 100, y * 100);
+            x++;
+        }
+        y++;
+    }
+}
+void initiallize_resources(t_data *data, t_validation_infos *info, char **test_map)
+{
+    int x;
+    int y;
+
+    y = 0;
     data->mlx = mlx_init();
     data->win = mlx_new_window(data->mlx, info->width * 100, info->height * 100, "so_long!");
-    t_sprite fram;
-
-    
+    initialize_sprites(data);
+    // while (test_map[y])
+    // {
+    //     x = 0;
+    //     while (test_map[y][x])
+    //     {
+    //         if(!ft_strchr("10PEC\n", test_map[y][x]))
+    //             return ;
+    //         else if(test_map[y][x] == 'P')
+    //             draw_player(data, info, x * 100, y * 100);
+    //         else if(test_map[y][x] == '1')
+    //             draw_wall(data, info, x * 100, y * 100);
+    //         else if(test_map[y][x] == 'E')
+    //             draw_exit(data, info, x * 100, y * 100);
+    //         else if(test_map[y][x] == 'C')
+    //             draw_coin(data, info, x * 100, y * 100);
+    //         else if (test_map[y][x] == '0')
+    //             draw_floor(data, info, x * 100, y * 100);   
+    //         x++;
+    //     }
+    //     y++;
+    // }
+    render_bg(data, info, test_map);
+    render_frames(data, info, test_map);
 }
 
 int handle_key_press(int keycode, t_data *data) {
@@ -34,43 +146,10 @@ int handle_key_press(int keycode, t_data *data) {
     // retur("map file is invalid"), 1);
 }
 
-void my_mlx_pixel_put(t_sprite img,int x, int y,int color)
+void    init_images(t_data *data, t_validation_infos *info)
 {
-
-        char *dst = img.addr + (y * img.line_len) + x * (img.bpp / 8);
-        *(unsigned int *)dst = color;
     
 }
-unsigned int    get_color(t_sprite img, int x, int y)
-{
-    int    offset;
-
-    if (x < 0 || x >= 32 || y < 0 || y >= 32)
-        return (0);
-    offset = (y * img.line_len) + (x * (img.bpp / 8));
-    return (*(unsigned int *)(img.addr + offset));
-}
-void fill_fram(t_sprite *fram,t_sprite sprite)
-{
-    int x,y;
-    unsigned int color;
-    y = 0;
-    while (y < 32)
-    {
-        x = 0;
-        while (x < 32)
-        {
-            
-            color = get_color(sprite,x,y);
-            // color = 0xFF0000;
-            my_mlx_pixel_put(*fram,x,y,color);
-            x++;
-        }
-        y++;
-    }
-
-}
-
 
 int main(int ac, char **av)
 {
@@ -78,6 +157,7 @@ int main(int ac, char **av)
     char **test_map;
     t_validation_infos *info;
     t_data data;
+    //t_sprite fram;
     
     if(ac != 2)
         return 1;
@@ -88,13 +168,20 @@ int main(int ac, char **av)
         return (free(data.map), free(test_map), 0);
     if(!check_map(test_map, info))
         return (printf("map is invalid"), 0);
-    initiallize_resources(&data, info);
-
-    // t_sprite img;
-    // img.width = 200;
-    // img.height = 200;
-    // img.img = mlx_xpm_file_to_image(data.mlx, "textures/Ninja Frog/Idle-_32x32_.xpm", &img.width, &img.height);
-    // img.addr = mlx_get_data_addr(img.img,&img.bpp,&img.line_len,&img.endian);
+    test_map = dup_map(data.map);
+    // print_map(test_map);
+    initiallize_resources(&data, info, test_map);
+    init_images(data, info);
+    // draw_player(&data, info, 200, 200);
+    // draw_wall(&data, info, 400, 400);
+    // draw_coin(&data, info, 500, 200);
+    // //draw_floor(&data, info, 200, 500);
+    // draw_exit(&data, info, 100, 100);
+    // t_sprite *img;
+    // img->width = 200;
+    // img->height = 200;
+    // img->img = mlx_xpm_file_to_image(data.mlx, "textures/Ninja Frog/Idle-_32x32_.xpm", &img->width, &img->height);
+    // img->addr = mlx_get_data_addr(img->img,&img->bpp,&img->line_len,&img->endian);
     // fram.img= mlx_new_image(data.mlx,32,32);
     // fram.addr = mlx_get_data_addr(fram.img,&fram.bpp,&fram.line_len,&fram.endian);
     // fill_fram(&fram,img);

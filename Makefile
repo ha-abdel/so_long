@@ -1,8 +1,8 @@
 # NAME = so_long
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address
 LFLAGS = -lmlx -lXext -lX11 -lm
-SRCS = main.c get_next_line.c get_next_line_utils.c get_next_line.h so_long.h
+SRCS = so_long.c check_map.c check_maps_utils.c get_next_line.c get_next_line_utils.c draw_sprites.c
 # OBJS = $(SRCS:.c=.o)
 
 # all: $(NAME)

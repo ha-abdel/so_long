@@ -6,7 +6,7 @@
 /*   By: abdel-ha <abdel-ha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 14:04:42 by abdel-ha          #+#    #+#             */
-/*   Updated: 2024/12/02 14:04:43 by abdel-ha         ###   ########.fr       */
+/*   Updated: 2025/01/12 11:51:06 by abdel-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,16 +39,16 @@ char	*ft_strdup(char *s1)
 	return (result);
 }
 
-char	*ft_strchr(char *s, int c)
-{
-	while ((char)c != *s)
-	{
-		if (!*s)
-			return (0);
-		s++;
-	}
-	return (s);
-}
+// char	*ft_strchr(char *s, int c)
+// {
+// 	while ((char)c != *s)
+// 	{
+// 		if (!*s)
+// 			return (0);
+// 		s++;
+// 	}
+// 	return (s);
+// }
 
 char	*ft_strjoin(char *s1, char *s2)
 {
