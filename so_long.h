@@ -1,6 +1,13 @@
 #ifndef SO_LONG_H
 #define SO_LONG_H
 
+#define ESCAPE 65307
+#define LEFT 65361
+#define UP 65362
+#define RIGHT 65363
+#define DOWN 65364
+
+#define FRAM_WIDTH 100
 
 #include <fcntl.h>
 #include <stdio.h>
@@ -24,6 +31,17 @@ typedef struct s_sprite
     int     y;
 } t_sprite;
 
+typedef struct s_validation_infos
+{
+    int count_Player;
+    int count_coin;
+    int count_exit;
+    int px;
+    int py;
+    int width;
+    int height;
+} t_validation_infos;
+
 // typedef struct s_player
 // {
 //     t_sprite    *player;
@@ -44,15 +62,19 @@ typedef struct s_data
     void    *mlx;
     void    *win;
     char    **map;
+    char    **test_map;
     int     width;
     int     height;
-    int     count_coins;
+    int     collected_coins;
     t_sprite   player;
     t_sprite    wall;
     t_sprite    floor;
     t_sprite    coin;
     t_sprite    exit;
     t_sprite    background;
+    t_sprite    frame;
+    t_validation_infos  *info;
+    char                action;
 } t_data;
 
 // typedef struct s_window
@@ -66,16 +88,6 @@ typedef struct s_data
 //     int         x;
 //     int         y;
 // } t_sprite;
-typedef struct s_validation_infos
-{
-    int count_Player;
-    int count_coin;
-    int count_exit;
-    int px;
-    int py;
-    int width;
-    int height;
-} t_validation_infos;
 
 
 #define WIN_W 2000
@@ -101,7 +113,17 @@ void draw_exit(t_data *data, t_validation_infos *info, int s_x, int s_y);
 void draw_coin(t_data *data, t_validation_infos *info, int s_x, int s_y);
 void draw_floor(t_data *data, t_validation_infos *info, int s_x, int s_y);
 void draw_wall(t_data *data, t_validation_infos *info, int s_x, int s_y);
+void draw_bg(t_data *data, t_validation_infos *info, int s_x, int s_y);
+
+
 void    init_images(t_data *data, t_validation_infos *info);
+void    initiallize_resources(t_data *data,t_validation_infos *info,char **test_map);
+void render_bg(t_data *data, t_validation_infos *info, char **test_map);
+void render_frames(t_data *data, t_validation_infos *info, char **test_map);
+void    fill_bg(t_data *data, t_sprite *frame, int s_x, int s_y);
+int     render_map(t_data *data);
+int     animate_player(t_data *data); 
+
 
 
 // void fill_fram(t_sprite *fram,t_sprite *sprite);
