@@ -40,22 +40,8 @@ typedef struct s_validation_infos
     int py;
     int width;
     int height;
+    int                 is_initialized;
 } t_validation_infos;
-
-// typedef struct s_player
-// {
-//     t_sprite    *player;
-//     int         player_x;
-//     int         player_y;
-
-// } t_player;
-
-// typedef struct s_coin
-// {
-//     t_sprite    *coin;
-//     int         coin_x;
-//     int         coin_y;
-// } t_coin;
 
 typedef struct s_data
 {
@@ -75,6 +61,8 @@ typedef struct s_data
     t_sprite    frame;
     t_validation_infos  *info;
     char                action;
+    int                 count_moves;
+    int                 frame_count;
 } t_data;
 
 // typedef struct s_window
@@ -93,6 +81,7 @@ typedef struct s_data
 #define WIN_W 2000
 #define WIN_H 2000
 
+
 // check map functions prototypes
 char **get_map(char *file_path);
 int get_map_len(char *file_path);
@@ -110,7 +99,7 @@ void print_map(char **s);
 void fill_fram(t_sprite *fram,t_sprite *sprite, t_sprite *bg);
 void draw_player(t_data *data, t_validation_infos *info, int s_x, int s_y);
 void draw_exit(t_data *data, t_validation_infos *info, int s_x, int s_y);
-void draw_coin(t_data *data, t_validation_infos *info, int s_x, int s_y);
+void draw_coin(t_data *data, t_validation_infos *info, int s_x, int s_y, int nbr_frm);
 void draw_floor(t_data *data, t_validation_infos *info, int s_x, int s_y);
 void draw_wall(t_data *data, t_validation_infos *info, int s_x, int s_y);
 void draw_bg(t_data *data, t_validation_infos *info, int s_x, int s_y);

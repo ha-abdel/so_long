@@ -108,7 +108,7 @@ void print_map(char **s)
 void flood_fill(char **test_map, int x, int y)
 {
     if(x < 0 || y < 0 || test_map[y] == NULL || test_map[y][x] == '\0'
-        || test_map[y][x] == 'F' || test_map[y][x] == '1' )
+        || test_map[y][x] == 'F'  || test_map[y][x] == '1' )
             return;
     test_map[y][x] ='F';
     //print_map(test_map);

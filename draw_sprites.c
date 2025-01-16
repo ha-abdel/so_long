@@ -10,7 +10,7 @@ void draw_player(t_data *data, t_validation_infos *info, int s_x, int s_y)
     if (!data->frame.img)
     {
         printf("Error: Failed to create frame image.\n");
-        mlx_destroy_image(data->mlx, data->player.img);
+        mlx_destroy_image(data->mlx, data->frame.img);
         return;
     }
     data->frame.addr = mlx_get_data_addr(data->frame.img, &data->frame.bpp, &data->frame.line_len, &data->frame.endian);
@@ -29,7 +29,7 @@ void draw_wall(t_data *data, t_validation_infos *info, int s_x, int s_y)
     if (!data->frame.img)
     {
         printf("Error: Failed to create frame image.\n");
-        mlx_destroy_image(data->mlx, data->wall.img);
+        mlx_destroy_image(data->mlx, data->frame.img);
         return;
     }
     data->frame.addr = mlx_get_data_addr(data->frame.img, &data->frame.bpp, &data->frame.line_len, &data->frame.endian);
@@ -48,7 +48,7 @@ void draw_floor(t_data *data, t_validation_infos *info, int s_x, int s_y)
     if (!data->frame.img)
     {
         printf("Error: Failed to create frame image.\n");
-        mlx_destroy_image(data->mlx, data->floor.img);
+        mlx_destroy_image(data->mlx, data->frame.img);
         return;
     }
     data->frame.addr = mlx_get_data_addr(data->frame.img, &data->frame.bpp, &data->frame.line_len, &data->frame.endian);
@@ -58,7 +58,7 @@ void draw_floor(t_data *data, t_validation_infos *info, int s_x, int s_y)
     mlx_destroy_image(data->mlx, data->frame.img);
 }
 
-void draw_coin(t_data *data, t_validation_infos *info, int s_x, int s_y)
+void draw_coin(t_data *data, t_validation_infos *info, int s_x, int s_y, int nbr_frm)
 {
     // t_sprite frame = {0};
 
@@ -67,7 +67,7 @@ void draw_coin(t_data *data, t_validation_infos *info, int s_x, int s_y)
     if (!data->frame.img)
     {
         printf("Error: Failed to create frame image.\n");
-        mlx_destroy_image(data->mlx, data->coin.img);
+        mlx_destroy_image(data->mlx, data->frame.img);
         return;
     }
     data->frame.addr = mlx_get_data_addr(data->frame.img, &data->frame.bpp, &data->frame.line_len, &data->frame.endian);
@@ -85,7 +85,7 @@ void draw_exit(t_data *data, t_validation_infos *info, int s_x, int s_y)
     if (!data->frame.img)
     {
         printf("Error: Failed to create frame image.\n");
-        mlx_destroy_image(data->mlx, data->exit.img);
+        mlx_destroy_image(data->mlx, data->frame.img);
         return;
     }
     data->frame.addr = mlx_get_data_addr(data->frame.img, &data->frame.bpp, &data->frame.line_len, &data->frame.endian);
