@@ -22,12 +22,12 @@ int	get_t(int trgb)
 {
 	return ((trgb >> 24) & 0xFF);
 }
-void fill_fram(t_sprite *fram,t_sprite *sprite, t_sprite *bg)
+void fill_fram(t_data *data,t_sprite *fram,t_sprite *sprite, t_sprite *bg)
 {
     int x,y;
     unsigned int color;
+
     y = 0;
-    
     while (y < 100)
     {
         
@@ -72,18 +72,8 @@ void    fill_bg(t_data *data, t_sprite *frame, int s_x, int s_y)
         x = 0;
         while (x < 100)
         {
-            //printf("%d, %d\n", s_x + x, s_y + y);
             color = get_color(&data->frame, x, y);
-            //printf("%p :  %p\n",&frame->img,frame->addr);
-            // printf("color: %#x\n", color);
-            //color = 0xFF0000;
-            // if (!get_t(color))
             my_mlx_pixel_put(&data->background, s_x + x, s_y + y, color);
-            // else
-            // {
-            //     color = get_color(bg,x,y);
-            //     my_mlx_pixel_put(fram,x,y,color);
-            // }
             x++;
         }
         y++;

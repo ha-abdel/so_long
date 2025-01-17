@@ -68,7 +68,7 @@ void    init_vars(t_data *data)
     data->exit.height = 100;
     data->exit.x = 0;
     data->exit.y = 0;
-    data->frame_count = 0;
+    data->coin.frame_count = 0;
 }
 
 void    initialize_sprites(t_data *data)
@@ -159,7 +159,6 @@ void initiallize_resources(t_data *data, t_validation_infos *info, char **test_m
             init_images(data, info);
             render_map(data);
         }
-
 }
 
 int    render_map(t_data *data)
@@ -174,23 +173,22 @@ int    render_map(t_data *data)
 
 void    init_images(t_data *data, t_validation_infos *info)
 {
-    data->player.img = mlx_xpm_file_to_image(data->mlx, "player.xpm", &data->player.width, &data->player.height);
+    data->player.img = mlx_xpm_file_to_image(data->mlx, "textures/player.xpm", &data->player.width, &data->player.height);
     data->player.addr = mlx_get_data_addr(data->player.img, &data->player.bpp, &data->player.line_len, &data->player.endian);
 
-    data->wall.img = mlx_xpm_file_to_image(data->mlx, "boxx.xpm", &data->wall.width, &data->wall.height);
+    data->wall.img = mlx_xpm_file_to_image(data->mlx, "textures/boxx.xpm", &data->wall.width, &data->wall.height);
     data->wall.addr = mlx_get_data_addr(data->wall.img, &data->wall.bpp, &data->wall.line_len, &data->wall.endian);
 
-    data->floor.img = mlx_xpm_file_to_image(data->mlx, "floor.xpm", &data->floor.width, &data->floor.height);
+    data->floor.img = mlx_xpm_file_to_image(data->mlx, "textures/floor.xpm", &data->floor.width, &data->floor.height);
     data->floor.addr = mlx_get_data_addr(data->floor.img, &data->floor.bpp, &data->floor.line_len, &data->floor.endian);
 
-    data->coin.img = mlx_xpm_file_to_image(data->mlx, "money4.xpm", &data->coin.width, &data->coin.height);
+    data->coin.img = mlx_xpm_file_to_image(data->mlx, "textures/money4.xpm", &data->coin.width, &data->coin.height);
     data->coin.addr = mlx_get_data_addr(data->coin.img, &data->coin.bpp, &data->coin.line_len, &data->coin.endian);
 
-    data->exit.img = mlx_xpm_file_to_image(data->mlx, "exit.xpm", &data->exit.width, &data->exit.height);
+    data->exit.img = mlx_xpm_file_to_image(data->mlx, "textures/door1.xpm", &data->exit.width, &data->exit.height);
     data->exit.addr = mlx_get_data_addr(data->exit.img, &data->exit.bpp, &data->exit.line_len, &data->exit.endian);
 
      data->background.img = mlx_new_image(data->mlx,data->info->width * 100,data->info->height * 100);
      data->background.addr = mlx_get_data_addr(data->background.img, &data->background.bpp, &data->background.line_len, &data->background.endian);
-
 }
 

@@ -14,7 +14,7 @@ void draw_player(t_data *data, t_validation_infos *info, int s_x, int s_y)
         return;
     }
     data->frame.addr = mlx_get_data_addr(data->frame.img, &data->frame.bpp, &data->frame.line_len, &data->frame.endian);
-    fill_fram(&data->frame, &data->player, &data->floor);
+    fill_fram(data, &data->frame, &data->player, &data->floor);
     //mlx_put_image_to_window(data->mlx, data->win, frame.img, 0, 0);
     fill_bg(data, &data->frame, s_x, s_y);
     //mlx_put_image_to_window(data->mlx, data->win, frame.img, s_x, s_y);
@@ -33,7 +33,7 @@ void draw_wall(t_data *data, t_validation_infos *info, int s_x, int s_y)
         return;
     }
     data->frame.addr = mlx_get_data_addr(data->frame.img, &data->frame.bpp, &data->frame.line_len, &data->frame.endian);
-    fill_fram(&data->frame, &data->wall, &data->floor);
+    fill_fram(data, &data->frame, &data->wall, &data->floor);
     fill_bg(data, &data->frame, s_x, s_y);
     // mlx_put_image_to_window(data->mlx, data->win, frame.img, s_x, s_y);
     mlx_destroy_image(data->mlx, data->frame.img);
@@ -52,13 +52,13 @@ void draw_floor(t_data *data, t_validation_infos *info, int s_x, int s_y)
         return;
     }
     data->frame.addr = mlx_get_data_addr(data->frame.img, &data->frame.bpp, &data->frame.line_len, &data->frame.endian);
-    fill_fram(&data->frame, &data->floor, &data->floor);
+    fill_fram(data, &data->frame, &data->floor, &data->floor);
     fill_bg(data, &data->frame, s_x, s_y);
     // mlx_put_image_to_window(data->mlx, data->win, frame.img, s_x, s_y);
     mlx_destroy_image(data->mlx, data->frame.img);
 }
 
-void draw_coin(t_data *data, t_validation_infos *info, int s_x, int s_y, int nbr_frm)
+void draw_coin(t_data *data, t_validation_infos *info, int s_x, int s_y)
 {
     // t_sprite frame = {0};
 
@@ -71,7 +71,7 @@ void draw_coin(t_data *data, t_validation_infos *info, int s_x, int s_y, int nbr
         return;
     }
     data->frame.addr = mlx_get_data_addr(data->frame.img, &data->frame.bpp, &data->frame.line_len, &data->frame.endian);
-    fill_fram(&data->frame, &data->coin, &data->floor);
+    fill_fram(data, &data->frame, &data->coin, &data->floor);
     fill_bg(data, &data->frame, s_x, s_y);
     // mlx_put_image_to_window(data->mlx, data->win, frame.img, s_x, s_y);
     mlx_destroy_image(data->mlx, data->frame.img);
@@ -89,7 +89,7 @@ void draw_exit(t_data *data, t_validation_infos *info, int s_x, int s_y)
         return;
     }
     data->frame.addr = mlx_get_data_addr(data->frame.img, &data->frame.bpp, &data->frame.line_len, &data->frame.endian);
-    fill_fram(&data->frame, &data->exit, &data->floor);
+    fill_fram(data, &data->frame, &data->exit, &data->floor);
     fill_bg(data, &data->frame, s_x, s_y);
     // mlx_put_image_to_window(data->mlx, data->win, frame.img, s_x, s_y);
     mlx_destroy_image(data->mlx, data->frame.img);

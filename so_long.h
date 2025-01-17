@@ -29,6 +29,7 @@ typedef struct s_sprite
     int     endian;
     int     x;
     int     y;
+    int     frame_count;
 } t_sprite;
 
 typedef struct s_validation_infos
@@ -62,7 +63,7 @@ typedef struct s_data
     t_validation_infos  *info;
     char                action;
     int                 count_moves;
-    int                 frame_count;
+    int                 frame_size;
 } t_data;
 
 // typedef struct s_window
@@ -96,10 +97,10 @@ void print_map(char **s);
 
 
 // initialise functions
-void fill_fram(t_sprite *fram,t_sprite *sprite, t_sprite *bg);
+void fill_fram(t_data *data ,t_sprite *fram,t_sprite *sprite, t_sprite *bg);
 void draw_player(t_data *data, t_validation_infos *info, int s_x, int s_y);
 void draw_exit(t_data *data, t_validation_infos *info, int s_x, int s_y);
-void draw_coin(t_data *data, t_validation_infos *info, int s_x, int s_y, int nbr_frm);
+void draw_coin(t_data *data, t_validation_infos *info, int s_x, int s_y);
 void draw_floor(t_data *data, t_validation_infos *info, int s_x, int s_y);
 void draw_wall(t_data *data, t_validation_infos *info, int s_x, int s_y);
 void draw_bg(t_data *data, t_validation_infos *info, int s_x, int s_y);
