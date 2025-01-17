@@ -22,26 +22,27 @@ int	get_t(int trgb)
 {
 	return ((trgb >> 24) & 0xFF);
 }
-void fill_fram(t_data *data,t_sprite *fram,t_sprite *sprite, t_sprite *bg)
+void fill_fram(t_data *data, t_sprite *sprite, int frame_nbr)
 {
     int x,y;
     unsigned int color;
 
-    y = 0;
-    while (y < 100)
+    data->frame.frame_count = frame_nbr;
+    y = frame_nbr - 1;
+    while (y < frame_nbr * 100)
     {
         
-        x = 0;
-        while (x < 100)
+        x = frame_nbr - 1;
+        while (x < frame_nbr * 100)
         {
            color = get_color(sprite,x,y);
             //color = 0xFFFF00;
             if (get_t(color) != 255)
-                my_mlx_pixel_put(fram,x,y,color);
+                my_mlx_pixel_put(&data->frame,x,y,color);
             else
             {
-                color = get_color(bg,x,y);
-                my_mlx_pixel_put(fram,x,y,color);
+                color = get_color(&data->floor,x,y);
+                my_mlx_pixel_put(&data->frame,x,y,color);
             }
             x++;
         }
@@ -64,13 +65,13 @@ void    fill_bg(t_data *data, t_sprite *frame, int s_x, int s_y)
     int x,y;
     unsigned int color;
 
-    y = 0;
+    y = data->frame.frame_count - 1;
     
-    while (y < 100)
+    while (y < data->frame.frame_count * 100)
     {
         
-        x = 0;
-        while (x < 100)
+        x = data->frame.frame_count - 1;
+        while (x < data->frame.frame_count * 100)
         {
             color = get_color(&data->frame, x, y);
             my_mlx_pixel_put(&data->background, s_x + x, s_y + y, color);

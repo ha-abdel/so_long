@@ -64,6 +64,7 @@ typedef struct s_data
     char                action;
     int                 count_moves;
     int                 frame_size;
+    int                 frame_nbr;
 } t_data;
 
 // typedef struct s_window
@@ -97,7 +98,7 @@ void print_map(char **s);
 
 
 // initialise functions
-void fill_fram(t_data *data ,t_sprite *fram,t_sprite *sprite, t_sprite *bg);
+void fill_fram(t_data *data, t_sprite *sprite, int frame_nbr);
 void draw_player(t_data *data, t_validation_infos *info, int s_x, int s_y);
 void draw_exit(t_data *data, t_validation_infos *info, int s_x, int s_y);
 void draw_coin(t_data *data, t_validation_infos *info, int s_x, int s_y);
