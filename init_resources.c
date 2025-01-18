@@ -71,6 +71,9 @@ void    init_vars(t_data *data)
     data->exit.y = 0;
     // data->coin.frame_count = 0;
     data->exit.frame_count = 9;
+    data->exit.frame_index = 1;
+    data->player.frame_count = 11;
+    data->player.frame_index = 0;
 }
 
 void    initialize_sprites(t_data *data)
@@ -155,12 +158,12 @@ void initiallize_resources(t_data *data, t_validation_infos *info, char **test_m
     printf("%d", data->info->width);
     data->width = info->width;
     data->height = info->height;
-    if(data->info->is_initialized == 0)
-        {
+    // if(data->info->is_initialized == 0)
+    //     {
             initialize_sprites(data);
             init_images(data, info);
             render_map(data);
-        }
+        // }
 }
 
 int    render_map(t_data *data)
@@ -175,7 +178,7 @@ int    render_map(t_data *data)
 
 void    init_images(t_data *data, t_validation_infos *info)
 {
-    data->player.img = mlx_xpm_file_to_image(data->mlx, "textures/player.xpm", &data->player.width, &data->player.height);
+    data->player.img = mlx_xpm_file_to_image(data->mlx, "Run.xpm", &data->player.width, &data->player.height);
     data->player.addr = mlx_get_data_addr(data->player.img, &data->player.bpp, &data->player.line_len, &data->player.endian);
 
     data->wall.img = mlx_xpm_file_to_image(data->mlx, "textures/boxx.xpm", &data->wall.width, &data->wall.height);

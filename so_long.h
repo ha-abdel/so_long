@@ -30,6 +30,7 @@ typedef struct s_sprite
     int     x;
     int     y;
     int     frame_count;
+    int     frame_index;
 } t_sprite;
 
 typedef struct s_validation_infos
@@ -63,7 +64,6 @@ typedef struct s_data
     t_validation_infos  *info;
     char                action;
     int                 count_moves;
-    int                 frame_size;
     int                 frame_nbr;
 } t_data;
 
