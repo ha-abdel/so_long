@@ -1,22 +1,6 @@
 #include "so_long.h"
 #include "string.h"
 
-void	ft_bzero(void *s, size_t n)
-{
-
-	size_t			i;
-	// unsigned char	value;
-	unsigned char	*ptr;
-
-	i = 0;
-	// value = (unsigned char)c;
-	ptr = (unsigned char *)s;
-	while (i < n)
-	{
-		ptr[i] = 0;
-		i++;
-	}
-}
 
 void    init_sprites(t_data *data)
 {
@@ -34,46 +18,53 @@ void    init_sprites(t_data *data)
     data->background.img = NULL;
     data->frame.addr = NULL;
     data->frame.img = NULL;
+    data->enemy.addr = NULL;
+    data->enemy.img = NULL;
     data->background.width = data->width * 100;
     data->background.height = data->height * 100;
     data->background.x = 0;
     data->background.y = 0;
-    data->frame.width = data->width * 100;
-    data->frame.height = data->height * 100;
+    data->frame.width =100;
+    data->frame.height = 100;
     data->frame.x = 0;
     data->frame.y = 0;
     data->action = 0;
     data->count_moves = 0; 
     data->frame_nbr = 0;
+    data->enemy.frame_count = 12;
+    data->enemy.frame_index = 1;
 }
 
 void    init_vars(t_data *data)
 {
-    data->coin.width = 100;
-    data->coin.height = 100;
+
     data->coin.x = 0;
     data->coin.y = 0;
-    data->player.width = 100;
-    data->player.height = 100;
+
     data->player.x = 0;
     data->player.y = 0;
-    data->wall.width = 100;
-    data->wall.height = 100;
+
     data->wall.x = 0;
     data->wall.y = 0;
-    data->floor.width = 100;
-    data->floor.height = 100;
+
     data->floor.x = 0;
     data->floor.y = 0;
-    data->exit.width = 100;
-    data->exit.height = 100;
+
     data->exit.x = 0;
     data->exit.y = 0;
-    // data->coin.frame_count = 0;
+
     data->exit.frame_count = 9;
     data->exit.frame_index = 1;
     data->player.frame_count = 11;
     data->player.frame_index = 0;
+    data->enemy.frame_count = 12;
+
+    data->enemy.x = 0;
+    data->enemy.y = 0;
+
+    data->enemy.action = '0';
+    data->player.action = '0';
+    data->collected_coins = 0;
 }
 
 void    initialize_sprites(t_data *data)
@@ -119,7 +110,9 @@ void render_frames(t_data *data, t_validation_infos *info, char **test_map)
             else if(test_map[y][x] == 'C')
                 draw_coin(data, info, x * 100, y * 100);
             else if (test_map[y][x] == '0')
-                draw_floor(data, info, x * 100, y * 100);   
+                draw_floor(data, info, x * 100, y * 100);
+            else if(test_map[y][x] == 'G')
+                draw_enemy(data, info, x * 100, y * 100);
             x++;
         }
         y++;
@@ -155,7 +148,7 @@ void initiallize_resources(t_data *data, t_validation_infos *info, char **test_m
     y = 0;
     data->mlx = mlx_init();
     data->win = mlx_new_window(data->mlx, info->width * 100, info->height * 100, "so_long!");
-    printf("%d", data->info->width);
+    // printf("%d", data->info->width);
     data->width = info->width;
     data->height = info->height;
     // if(data->info->is_initialized == 0)
@@ -178,8 +171,11 @@ int    render_map(t_data *data)
 
 void    init_images(t_data *data, t_validation_infos *info)
 {
-    data->player.img = mlx_xpm_file_to_image(data->mlx, "Run.xpm", &data->player.width, &data->player.height);
+    data->player.img = mlx_xpm_file_to_image(data->mlx, "textures/Run.xpm", &data->player.width, &data->player.height);
     data->player.addr = mlx_get_data_addr(data->player.img, &data->player.bpp, &data->player.line_len, &data->player.endian);
+
+     data->enemy.img = mlx_xpm_file_to_image(data->mlx, "textures/enemy.xpm", &data->enemy.width, &data->enemy.height);
+    data->enemy.addr = mlx_get_data_addr(data->enemy.img, &data->enemy.bpp, &data->enemy.line_len, &data->enemy.endian);
 
     data->wall.img = mlx_xpm_file_to_image(data->mlx, "textures/boxx.xpm", &data->wall.width, &data->wall.height);
     data->wall.addr = mlx_get_data_addr(data->wall.img, &data->wall.bpp, &data->wall.line_len, &data->wall.endian);

@@ -31,6 +31,7 @@ typedef struct s_sprite
     int     y;
     int     frame_count;
     int     frame_index;
+    char    action;
 } t_sprite;
 
 typedef struct s_validation_infos
@@ -38,6 +39,9 @@ typedef struct s_validation_infos
     int count_Player;
     int count_coin;
     int count_exit;
+    int count_enemy;
+    int ex;
+    int ey;
     int px;
     int py;
     int width;
@@ -55,6 +59,7 @@ typedef struct s_data
     int     height;
     int     collected_coins;
     t_sprite   player;
+    t_sprite    enemy;
     t_sprite    wall;
     t_sprite    floor;
     t_sprite    coin;
@@ -65,6 +70,16 @@ typedef struct s_data
     char                action;
     int                 count_moves;
     int                 frame_nbr;
+    // int target_x;      // Target x position in pixels
+    // int target_y;      // Target y position in pixels
+    // int moving;        // 1 if the player is moving, 0 otherwise
+    // int move_steps;    // Number of steps for smooth movement
+    // int step_count;    // Counter to track incremental movement
+    // int current_x;    // Current x position in pixels
+    // int current_y;    // Current y position in pixels
+    // int target_tile_x;
+    // int target_tile_y;
+
 } t_data;
 
 // typedef struct s_window
@@ -90,7 +105,7 @@ int get_map_len(char *file_path);
 int ft_check_helper(char **map, int len, int map_len);
 char **get_map(char *file_path);
 void flood_fill(char **test_map, int x, int y);
-int check_map(char **test_map, t_validation_infos *info);
+int check_map(char **test_map, t_data *data);
 char **dup_map(char **map);
 void print_map(char **s);
 
@@ -99,12 +114,16 @@ void print_map(char **s);
 
 // initialise functions
 void fill_fram(t_data *data, t_sprite *sprite, int frame_nbr);
+
+void fill_enemy_fram(t_data *data, t_sprite *sprite, int frame_nbr);
 void draw_player(t_data *data, t_validation_infos *info, int s_x, int s_y);
 void draw_exit(t_data *data, t_validation_infos *info, int s_x, int s_y);
 void draw_coin(t_data *data, t_validation_infos *info, int s_x, int s_y);
 void draw_floor(t_data *data, t_validation_infos *info, int s_x, int s_y);
 void draw_wall(t_data *data, t_validation_infos *info, int s_x, int s_y);
 void draw_bg(t_data *data, t_validation_infos *info, int s_x, int s_y);
+
+void draw_enemy(t_data *data, t_validation_infos *info, int s_x, int s_y);
 
 
 void    init_images(t_data *data, t_validation_infos *info);
