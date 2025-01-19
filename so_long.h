@@ -17,6 +17,7 @@
 #include <stdlib.h>
 #include <mlx.h>
 #include <math.h>
+#include "get_next_line.h"
 
 typedef struct s_sprite
 {
@@ -107,12 +108,23 @@ char **get_map(char *file_path);
 void flood_fill(char **test_map, int x, int y);
 int check_map(char **test_map, t_data *data);
 char **dup_map(char **map);
-void print_map(char **s);
+// void print_map(char **s);
+
+void fill_fram(t_data *data, t_sprite *sprite, int frame_nbr);
+int	get_t(int trgb);
+unsigned int    get_color(t_sprite *img, int x, int y);
+void my_mlx_pixel_put(t_sprite *img,int x, int y,int color);
+
+void	store_cordinates_for_enemy(t_data *data, int x, int y);
 
 
-
-
+void	store_cordinates_for_player(t_data *data, int x, int y);
 // initialise functions
+void render_frames(t_data *data, t_validation_infos *info, char **test_map);
+
+void render_bg(t_data *data, t_validation_infos *info, char **test_map);
+
+int    render_map(t_data *data);
 void fill_fram(t_data *data, t_sprite *sprite, int frame_nbr);
 
 void fill_enemy_fram(t_data *data, t_sprite *sprite, int frame_nbr);
@@ -134,6 +146,14 @@ void    fill_bg(t_data *data, t_sprite *frame, int s_x, int s_y);
 int     render_map(t_data *data);
 int     animate_player(t_data *data); 
 
+int     animate_door(t_data *data); 
+
+int     animate_enemy(t_data *data); 
+int	check_next(t_data *data, int old_x, int old_y);
+
+void	handle_action(t_data *data);
+
+int close_window(t_data *data);
 
 
 // void fill_fram(t_sprite *fram,t_sprite *sprite);

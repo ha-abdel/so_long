@@ -2,7 +2,7 @@
 #include "string.h"
 
 
-void    init_sprites(t_data *data)
+void    init_vars1(t_data *data)
 {
     data->coin.addr = NULL;
     data->coin.img = NULL;
@@ -20,6 +20,35 @@ void    init_sprites(t_data *data)
     data->frame.img = NULL;
     data->enemy.addr = NULL;
     data->enemy.img = NULL;
+   
+}
+
+void    init_vars(t_data *data)
+{
+    data->coin.x = 0;
+    data->coin.y = 0;
+    data->player.x = 0;
+    data->player.y = 0;
+    data->wall.x = 0;
+    data->wall.y = 0;
+    data->floor.x = 0;
+    data->floor.y = 0;
+    data->exit.x = 0;
+    data->exit.y = 0;
+    data->exit.frame_count = 9;
+    data->exit.frame_index = 1;
+    data->player.frame_count = 11;
+    data->player.frame_index = 0;
+    data->enemy.frame_count = 12;
+    data->enemy.x = 0;
+    data->enemy.y = 0;
+    data->enemy.action = '0';
+    data->player.action = '0';
+    data->collected_coins = 0;
+}
+
+void    init_vars2(t_data * data)
+{
     data->background.width = data->width * 100;
     data->background.height = data->height * 100;
     data->background.x = 0;
@@ -35,89 +64,14 @@ void    init_sprites(t_data *data)
     data->enemy.frame_index = 1;
 }
 
-void    init_vars(t_data *data)
-{
-
-    data->coin.x = 0;
-    data->coin.y = 0;
-
-    data->player.x = 0;
-    data->player.y = 0;
-
-    data->wall.x = 0;
-    data->wall.y = 0;
-
-    data->floor.x = 0;
-    data->floor.y = 0;
-
-    data->exit.x = 0;
-    data->exit.y = 0;
-
-    data->exit.frame_count = 9;
-    data->exit.frame_index = 1;
-    data->player.frame_count = 11;
-    data->player.frame_index = 0;
-    data->enemy.frame_count = 12;
-
-    data->enemy.x = 0;
-    data->enemy.y = 0;
-
-    data->enemy.action = '0';
-    data->player.action = '0';
-    data->collected_coins = 0;
-}
-
 void    initialize_sprites(t_data *data)
 {
+    init_vars1(data);
+    init_vars2(data);
     init_vars(data);
-    init_sprites(data);
 }
 
-void render_bg(t_data *data, t_validation_infos *info, char **test_map)
-{
-    int x;
-    int y;
 
-    y = 0;
-    while (test_map[y])
-    {
-        x = 0;
-        while (test_map[y][x])
-        {
-            draw_floor(data, info, x * 100, y * 100);
-            x++;
-        }
-        y++;
-    }
-}
-void render_frames(t_data *data, t_validation_infos *info, char **test_map)
-{
-    int x;
-    int y;
-
-    y = 0;
-    while (test_map[y])
-    {
-        x = 0;
-        while (test_map[y][x])
-        {
-            if(x == info->px && y == info->py)
-                draw_player(data, info, x * 100, y * 100);
-            else if(test_map[y][x] == '1')
-                draw_wall(data, info, x * 100, y * 100);
-            else if(test_map[y][x] == 'E')
-                draw_exit(data, info, x * 100, y * 100);
-            else if(test_map[y][x] == 'C')
-                draw_coin(data, info, x * 100, y * 100);
-            else if (test_map[y][x] == '0')
-                draw_floor(data, info, x * 100, y * 100);
-            else if(test_map[y][x] == 'G')
-                draw_enemy(data, info, x * 100, y * 100);
-            x++;
-        }
-        y++;
-    }
-}
 
 // void render_frames1(t_data *data, t_validation_infos *info, char **test_map)
 // {
@@ -159,14 +113,7 @@ void initiallize_resources(t_data *data, t_validation_infos *info, char **test_m
         // }
 }
 
-int    render_map(t_data *data)
-{
 
-    // render_bg(data, data->info, data->test_map);
-    render_frames(data, data->info, data->test_map);
-    draw_bg(data, data->info, 0, 0);
-    return 0;
-}
 
 
 void    init_images(t_data *data, t_validation_infos *info)
