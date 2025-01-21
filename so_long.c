@@ -1,20 +1,49 @@
 #include "get_next_line.h"
 #include "so_long.h"
-#include <strings.h>
 
 
 
 
 
-void	move_enemy(t_data *data)
+void move_enemy(t_data *data)
 {
-    int    enemy_x = data->info->ex * 100;
-    int    enemy_y = data->info->ey * 100;
-	// int    player_x = data->info->px * 100;
-	// int    player_y = data->info->py * 100;
+    int dx = data->info->px - data->info->ex; 
+    int dy = data->info->py - data->info->ey; 
 
+    int new_x = data->info->ex;
+    int new_y = data->info->ey;
 
+    if (abs(dx) > abs(dy))
+    {
+        if (dx > 0 && data->test_map[new_y][new_x + 1] != '1')
+            new_x++;
+        else if (dx < 0 && data->test_map[new_y][new_x - 1] != '1')
+            new_x--;
+    }
+    else 
+    {
+        if (dy > 0 && data->test_map[new_y + 1][new_x] != '1')
+            new_y++;
+        else if (dy < 0 && data->test_map[new_y - 1][new_x] != '1')
+            new_y--;
+    }
+    if (new_x == data->info->px && new_y == data->info->py)
+    {
+		animate_enemy(data);
+        printf("You lose!\n");
+        exit(0); 
+    }
+    if (data->test_map[new_y][new_x] != '1' && data->test_map[new_y][new_x] != 'E' && data->test_map[new_y][new_x] != 'C')
+    {
+        data->test_map[data->info->ey][data->info->ex] = '0'; 
+        data->info->ex = new_x;
+        data->info->ey = new_y;
+        data->test_map[new_y][new_x] = 'E';
+    }
+
+    render_map(data);
 }
+
 
 
 
@@ -73,6 +102,7 @@ int	main(int ac, char **av)
 		return (free(data.map), free(data.test_map), 0);
 	if (!check_map(data.test_map, &data))
 		return (printf("map is invalid"), 0);
+	printf("%d %d\n", data.info->ex, data.info->ey);
 	data.test_map = dup_map(data.map);
 	initiallize_resources(&data, data.info, data.test_map);
 	printf("%d", data.coin.width);
