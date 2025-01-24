@@ -1,6 +1,6 @@
 #include "so_long.h"
 
-char	*ft_strtrim(char  *s1, char  *set)
+char	*ft_strtrim(char *s1, char *set)
 {
 	size_t	i;
 	size_t	j;
@@ -46,10 +46,10 @@ char	*ft_strchr(char *s, int c)
 	return (s);
 }
 
-size_t	ft_strlcpy(char *dst,  char *src, size_t dstsize)
+size_t	ft_strlcpy(char *dst, char *src, size_t dstsize)
 {
-	size_t	i;
-	size_t	srclen;
+	size_t i;
+	size_t srclen;
 
 	i = 0;
 	srclen = ft_strlen(src);

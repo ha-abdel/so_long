@@ -35,7 +35,6 @@ char	**get_map(char *file_path)
 	char	**map;
 	char	*line;
 	int		i;
-	int		len;
 	int		fd;
 
 	map = malloc((get_map_len(file_path) + 1) * sizeof(char *));

@@ -7,7 +7,6 @@ void	store_cordinates_for_player(t_data *data, int x, int y)
 	data->info->py = y;
 	data->player.x = x;
 	data->player.y = y;
-	
 }
 void	store_cordinates_for_enemy(t_data *data, int x, int y)
 {

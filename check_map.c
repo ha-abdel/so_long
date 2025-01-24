@@ -32,14 +32,12 @@ int	check_map_walls(char **map, t_validation_infos *info)
 		map_len++;
 	info->width = len;
 	info->height = map_len;
-	if(info->width > 38 || info->height > 20)
-		return 0;
+	if (info->width > 38 || info->height > 20)
+		return (0);
 	if (!ft_check_helper(map, len, map_len))
 		return (0);
 	return (1);
 }
-
-
 
 void	check_map_elements(char **map, t_data *data)
 {
@@ -68,18 +66,18 @@ void	check_map_elements(char **map, t_data *data)
 	}
 }
 
-// void	print_map(char **s)
-// {
-// 	int	x;
+void	print_map(char **s)
+{
+	int	x;
 
-// 	x = 0;
-// 	while (s[x])
-// 	{
-// 		printf("%s\n", s[x]);
-// 		x++;
-// 	}
-// 	// printf("\n\n");
-// }
+	x = 0;
+	while (s[x])
+	{
+		printf("%s\n", s[x]);
+		x++;
+	}
+	// printf("\n\n");
+}
 
 int	check_map(char **test_map, t_data *data)
 {

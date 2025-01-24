@@ -4,6 +4,7 @@ int	animate_door(t_data *data)
 {
 	static int	frame = 0;
 	static int	frame_timer = 0;
+
 	if (data->exit.frame_index >= 9)
 		return (1);
 	if (frame_timer++ >= 2)
@@ -21,12 +22,10 @@ int	animate_enemy(t_data *data)
 
 	if (data->enemy.frame_index >= 12)
 		data->enemy.frame_index = 0;
-	if (frame_timer++ >= 8)
+	if (frame_timer++ >= 3)
 	{
 		frame_timer = 0;
 		data->enemy.frame_index++;
-        // printf("%d\n", data)
-        // draw_player(data, data->info, data->info->px, data->info->py);
 	}
 	return (0);
 }
@@ -38,20 +37,18 @@ int	animate_player(t_data *data)
 
 	if (data->player.frame_index >= 11)
 		data->player.frame_index = 0;
-	if (frame_timer++ >= 1)
+	if (frame_timer++ >= 0)
 	{
 		frame_timer = 0;
 		data->player.frame_index++;
-        // printf("%d\n", data)
-        // draw_player(data, data->info, data->info->px, data->info->py);
 	}
 	return (0);
 }
 
 void	handle_action(t_data *data)
 {
-	if (data->player.action == 'l' && data->test_map[data->info->py][data->info->px
-		- 1] != '1')
+	if (data->player.action == 'l'
+		&& data->test_map[data->info->py][data->info->px - 1] != '1')
 	{
 		data->info->px -= 1;
 		check_next(data, data->info->px + 1, data->info->py);
@@ -93,14 +90,10 @@ int	check_next(t_data *data, int old_x, int old_y)
 	else if (data->test_map[data->info->py][data->info->px] == 'E'
 		&& data->collected_coins == data->info->count_coin)
 	{
-		printf("count : %d\n", data->count_moves);
 		// free()   free all resources here
 		mlx_destroy_window(data->mlx, data->win);
 		exit(0);
 	}
 	data->test_map[old_y][old_x] = '0';
-    //  animate_player(data);
-	// draw_player(data, data->info, data->info->px, data->info->py);
-	printf("count : %d\n", data->count_moves);
 	return (0);
 }
