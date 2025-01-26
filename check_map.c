@@ -6,10 +6,9 @@
 /*   By: abdel-ha <abdel-ha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 15:35:41 by abdel-ha          #+#    #+#             */
-/*   Updated: 2025/01/26 09:33:25 by abdel-ha         ###   ########.fr       */
+/*   Updated: 2025/01/26 15:48:20 by abdel-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "so_long.h"
 
@@ -78,8 +77,6 @@ void	check_map_elements(char **map, t_data *data)
 	}
 }
 
-
-
 int	check_map(char **test_map, t_data *data)
 {
 	int	x;
@@ -89,7 +86,7 @@ int	check_map(char **test_map, t_data *data)
 	if (!check_map_length(test_map) || !check_map_walls(test_map, data->info))
 		return (0);
 	check_map_elements(test_map, data);
-	if (data->info->count_Player != 1 || data->info->count_exit != 1
+	if (data->info->count_player != 1 || data->info->count_exit != 1
 		|| data->info->count_coin < 1)
 		return (0);
 	flood_fill(test_map, data->info->px, data->info->py);

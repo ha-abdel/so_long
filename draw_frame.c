@@ -6,7 +6,7 @@
 /*   By: abdel-ha <abdel-ha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 15:36:05 by abdel-ha          #+#    #+#             */
-/*   Updated: 2025/01/24 15:36:06 by abdel-ha         ###   ########.fr       */
+/*   Updated: 2025/01/26 11:17:24 by abdel-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,9 @@ void	fill_enemy_fram(t_data *data, t_sprite *sprite, int frame_nbr)
 {
 	unsigned int	color;
 	int				sprite_x;
+	int				x;
+	int				y;
 
-	int x, y;
 	data->frame.frame_index = frame_nbr;
 	y = 0;
 	while (y < 100)
@@ -44,8 +45,9 @@ void	fill_fram(t_data *data, t_sprite *sprite, int frame_nbr)
 {
 	unsigned int	color;
 	int				sprite_x;
+	int				x;
+	int				y;
 
-	int x, y;
 	data->frame.frame_index = frame_nbr;
 	y = 0;
 	while (y < FRAM_WIDTH)
@@ -72,8 +74,9 @@ void	fill_reverse_fram(t_data *data, t_sprite *sprite, int frame_nbr)
 {
 	unsigned int	color;
 	int				sprite_x;
+	int				x;
+	int				y;
 
-	int x, y;
 	data->frame.frame_index = frame_nbr;
 	y = 0;
 	while (y < FRAM_WIDTH)
@@ -99,8 +102,9 @@ void	fill_reverse_fram(t_data *data, t_sprite *sprite, int frame_nbr)
 void	fill_bg(t_data *data, t_sprite *frame, int s_x, int s_y)
 {
 	unsigned int	color;
+	int				x;
+	int				y;
 
-	int x, y;
 	y = 0;
 	while (y < 100)
 	{

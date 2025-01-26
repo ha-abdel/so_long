@@ -6,7 +6,7 @@
 /*   By: abdel-ha <abdel-ha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 15:36:43 by abdel-ha          #+#    #+#             */
-/*   Updated: 2025/01/24 15:36:44 by abdel-ha         ###   ########.fr       */
+/*   Updated: 2025/01/26 11:18:57 by abdel-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	ft_putstr(char *s)
 {
-    int i;
+	int	i;
 
-    i = 0;
+	i = 0;
 	if (!s)
 	{
 		return ;
@@ -24,6 +24,6 @@ void	ft_putstr(char *s)
 	while (s[i])
 	{
 		write(1, &s[i], 1);
-        i++;
+		i++;
 	}
 }

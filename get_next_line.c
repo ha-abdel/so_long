@@ -6,13 +6,11 @@
 /*   By: abdel-ha <abdel-ha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 14:04:23 by abdel-ha          #+#    #+#             */
-/*   Updated: 2025/01/12 11:48:34 by abdel-ha         ###   ########.fr       */
+/*   Updated: 2025/01/26 11:55:23 by abdel-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-
-
 
 void	*ft_calloc(size_t count, size_t size)
 {
@@ -98,7 +96,7 @@ char	*get_next_line(int fd)
 	char		*line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
-		return (NULL);
+		return (free(leftover), NULL);
 	if (leftover && ft_strchr(leftover, '\n'))
 		return (fill_line(&leftover));
 	if (!leftover)

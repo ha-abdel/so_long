@@ -6,7 +6,7 @@
 /*   By: abdel-ha <abdel-ha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 15:35:52 by abdel-ha          #+#    #+#             */
-/*   Updated: 2025/01/26 09:21:59 by abdel-ha         ###   ########.fr       */
+/*   Updated: 2025/01/26 11:13:50 by abdel-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,16 +42,6 @@ int	ft_check_helper(char **map, int len, int map_len)
 	return (1);
 }
 
-int	check_file_name(char *file_path)
-{
-	int    i;
-
-    i = ft_strlen(file_path) - 4;
-    if (i > 0 && ft_strncmp(file_path + i, ".ber", 4) == 0)
-        return (1);
-    return (0);
-}
-
 char	**get_map(char *file_path)
 {
 	char	**map;
@@ -59,11 +49,11 @@ char	**get_map(char *file_path)
 	int		i;
 	int		fd;
 
-    if (!check_file_name(file_path))
+	if (!check_file_name(file_path))
 		return (NULL);
 	map = malloc((get_map_len(file_path) + 1) * sizeof(char *));
 	if (!map)
-	    return (NULL);
+		return (NULL);
 	fd = open(file_path, O_RDWR);
 	i = 0;
 	line = get_next_line(fd);
@@ -135,12 +125,8 @@ void	flood_fill(char **test_map, int x, int y)
 		|| test_map[y][x] == 'F' || test_map[y][x] == '1')
 		return ;
 	test_map[y][x] = 'F';
-	// print_map(test_map);
 	flood_fill(test_map, x + 1, y);
-
 	flood_fill(test_map, x - 1, y);
-
 	flood_fill(test_map, x, y + 1);
-
 	flood_fill(test_map, x, y - 1);
 }

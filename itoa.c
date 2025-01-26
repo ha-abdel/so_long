@@ -6,7 +6,7 @@
 /*   By: abdel-ha <abdel-ha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 15:37:11 by abdel-ha          #+#    #+#             */
-/*   Updated: 2025/01/24 15:37:12 by abdel-ha         ###   ########.fr       */
+/*   Updated: 2025/01/26 11:22:39 by abdel-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,9 +84,9 @@ char	*checknbr(long nb, char *arr, int *sign)
 
 char	*ft_itoa(int n)
 {
-	char *arr;
-	long nb;
-	int sign;
+	char	*arr;
+	long	nb;
+	int		sign;
 
 	nb = n;
 	sign = 0;

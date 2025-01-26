@@ -6,7 +6,7 @@
 /*   By: abdel-ha <abdel-ha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 15:37:28 by abdel-ha          #+#    #+#             */
-/*   Updated: 2025/01/26 11:02:50 by abdel-ha         ###   ########.fr       */
+/*   Updated: 2025/01/26 12:18:55 by abdel-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@
 # define FRAM_WIDTH 100
 
 # include "get_next_line.h"
+# include </home/abdel-ha/Downloads/minilibx-linux/mlx.h>
 # include <errno.h>
 # include <fcntl.h>
 # include <math.h>
-# include </home/abdel-ha/Downloads/minilibx-linux/mlx.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
@@ -40,8 +40,6 @@ typedef struct s_sprite
 	int					bpp;
 	int					line_len;
 	int					endian;
-	int					x;
-	int					y;
 	int					frame_count;
 	int					frame_index;
 	char				action;
@@ -50,7 +48,7 @@ typedef struct s_sprite
 
 typedef struct s_validation_infos
 {
-	int					count_Player;
+	int					count_player;
 	int					count_coin;
 	int					count_exit;
 	int					count_enemy;
@@ -60,7 +58,6 @@ typedef struct s_validation_infos
 	int					py;
 	int					width;
 	int					height;
-	int					is_initialized;
 	int					collide;
 }						t_validation_infos;
 
@@ -88,14 +85,6 @@ typedef struct s_data
 	int					frame_nbr;
 }						t_data;
 
-
-# define WIN_W 2000
-# define WIN_H 2000
-
-int	ft_printf(const char *s, ...);
-
-
-
 // check map functions prototypes
 char					**get_map(char *file_path);
 int						get_map_len(char *file_path);
@@ -106,7 +95,7 @@ int						check_map(char **test_map, t_data *data);
 char					**dup_map(char **map);
 // void print_map(char **s);
 
-void    init_vars3(t_data *data);
+void					init_vars3(t_data *data);
 void					fill_fram(t_data *data, t_sprite *sprite,
 							int frame_nbr);
 int						get_t(int trgb);
@@ -123,7 +112,6 @@ void					render_frames(t_data *data, t_validation_infos *info,
 
 // void	*ft_calloc(size_t count, size_t size);
 
-
 // void					render_bg(t_data *data, t_validation_infos *info,
 // 							char **test_map);
 
@@ -138,24 +126,16 @@ void					fill_reverse_fram(t_data *data, t_sprite *sprite,
 							int frame_nbr);
 void					fill_moves_fram(t_data *data, t_sprite *sprite,
 							int frame_nbr);
-void					draw_player(t_data *data,
-							int s_x, int s_y);
-void					draw_exit(t_data *data,
-							int s_x, int s_y);
-void					draw_coin(t_data *data,
-							int s_x, int s_y);
-void					draw_floor(t_data *data,
-							int s_x, int s_y);
-void					draw_wall(t_data *data,
-							int s_x, int s_y);
-void					draw_bg(t_data *data, int s_x,
-							int s_y);
+void					draw_player(t_data *data, int s_x, int s_y);
+void					draw_exit(t_data *data, int s_x, int s_y);
+void					draw_coin(t_data *data, int s_x, int s_y);
+void					draw_floor(t_data *data, int s_x, int s_y);
+void					draw_wall(t_data *data, int s_x, int s_y);
+void					draw_bg(t_data *data, int s_x, int s_y);
 
-void					draw_moves(t_data *data,
-							int s_x, int s_y);
+void					draw_moves(t_data *data, int s_x, int s_y);
 
-void					draw_enemy(t_data *data,
-							int s_x, int s_y);
+void					draw_enemy(t_data *data, int s_x, int s_y);
 
 void					init_images(t_data *data);
 
@@ -163,10 +143,8 @@ void					init_images1(t_data *data);
 
 void					init_vars(t_data *data);
 
-void					init_vars1(t_data *data);
-
 void					init_vars2(t_data *data);
-void					initiallize_resources(t_data *data,
+int						initiallize_resources(t_data *data,
 							t_validation_infos *info);
 void					render_bg(t_data *data, char **test_map);
 void					render_frames(t_data *data, t_validation_infos *info,
@@ -199,15 +177,17 @@ char					*ft_strtrim(char *s1, char *set);
 char					*ft_strchr(char *s, int c);
 int						ft_strlen(char *s);
 
-void	*ft_memset(void *b, int c, size_t len);
+void					*ft_memset(void *b, int c, size_t len);
 
-void	*ft_calloc(size_t count, size_t size);
+void					*ft_calloc(size_t count, size_t size);
 
-void	ft_putstr(char *s);
+void					ft_putstr(char *s);
 
-int	ft_strncmp(char *s1, char *s2, int n);
+int						ft_strncmp(char *s1, char *s2, int n);
 
-void    free_data(t_data *data);
+void					free_data(t_data *data);
 
-void cleanup_resources(t_data *data);
+void					cleanup_resources(t_data *data);
+
+int						check_file_name(char *file_path);
 #endif

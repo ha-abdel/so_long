@@ -6,7 +6,7 @@
 /*   By: abdel-ha <abdel-ha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 15:35:32 by abdel-ha          #+#    #+#             */
-/*   Updated: 2025/01/26 11:10:58 by abdel-ha         ###   ########.fr       */
+/*   Updated: 2025/01/26 16:00:34 by abdel-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ int	check_next(t_data *data, int old_x, int old_y)
 		&& data->collected_coins == data->info->count_coin)
 	{
 		cleanup_resources(data);
+		ft_putstr("you won");
 		exit(0);
 	}
 	data->test_map[old_y][old_x] = '0';

@@ -6,7 +6,7 @@
 /*   By: abdel-ha <abdel-ha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 15:37:14 by abdel-ha          #+#    #+#             */
-/*   Updated: 2025/01/26 09:12:46 by abdel-ha         ###   ########.fr       */
+/*   Updated: 2025/01/26 11:23:26 by abdel-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,8 @@ char	*ft_strchr(char *s, int c)
 
 size_t	ft_strlcpy(char *dst, char *src, size_t dstsize)
 {
-	size_t i;
-	size_t srclen;
+	size_t	i;
+	size_t	srclen;
 
 	i = 0;
 	srclen = ft_strlen(src);
@@ -92,35 +92,3 @@ void	*ft_memset(void *b, int c, size_t len)
 	}
 	return (b);
 }
-
-int	ft_strncmp(char *s1, char *s2, int n)
-{
-	int	i;
-
-	i = 0;
-	if (i == n)
-		return (0);
-	while (s1[i] && s2[i] && i < n)
-	{
-		if (s1[i] != s2[i])
-			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
-		i++;
-	}
-
-	return (0);
-}
-
-// void	*ft_calloc(size_t count, size_t size)
-// {
-// 	size_t	len;
-// 	void	*ptr;
-
-// 	len = count * size;
-// 	if (size != 0 && count > (size_t) - 1 / size)
-// 		return (NULL);
-// 	ptr = (void *)malloc(len);
-// 	if (!ptr)
-// 		return (NULL);
-// 	ft_memset(ptr, 0, len);
-// 	return (ptr);
-// }

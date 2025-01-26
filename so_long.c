@@ -6,7 +6,7 @@
 /*   By: abdel-ha <abdel-ha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 15:37:23 by abdel-ha          #+#    #+#             */
-/*   Updated: 2025/01/26 11:05:16 by abdel-ha         ###   ########.fr       */
+/*   Updated: 2025/01/26 15:49:02 by abdel-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,7 @@ void	move_enemy(t_data *data)
 			data->test_map[data->info->ey][data->info->ex] = '0';
 		data->info->ex = new_x;
 		data->info->ey = new_y;
-		draw_enemy(data, data->info->ex, data->info->ey);
 	}
-	// render_map(data);
 }
 
 int	animate_all(t_data *data)
@@ -82,7 +80,6 @@ int	animate_all(t_data *data)
 		animate_door(data);
 	animate_player(data);
 	move_enemy(data);
-	// animate_enemy(data);
 	render_map(data);
 	return (0);
 }
@@ -111,71 +108,30 @@ int	handle_key_press(int keycode, t_data *data)
 	return (0);
 }
 
-void	print_map(char **s)
-{
-	int	x;
-
-	x = 0;
-	while (s[x])
-	{
-		printf("%s\n", s[x]);
-		x++;
-	}
-	// printf("\n\n");
-}
-
 int	main(int ac, char **av)
 {
 	t_data	data;
 
 	if (ac != 2)
-		return (ft_putstr("expected args : so_long maps/map.ber") ,1);
+		return (ft_putstr("expected args : so_long maps/map.ber"), 1);
 	data.info = ft_calloc(1, sizeof(t_validation_infos));
-	if(data.info == NULL)
-	    return (1);
+	if (data.info == NULL)
+		return (1);
 	init_vars3(&data);
 	data.map = get_map(av[1]);
 	if (!data.map)
 		return (free_data(&data), 1);
 	data.test_map = dup_map(data.map);
 	if (!data.test_map)
-		return (free_data(&data), 0);
+		return (free_data(&data), 1);
 	if (!check_map(data.test_map, &data))
-		return (free_data(&data), ft_putstr("map is invalid"), 0);
+		return (free_data(&data), ft_putstr("map is invalid"), 1);
 	data.test_map = dup_map(data.map);
-	initiallize_resources(&data, data.info);
+	if (initiallize_resources(&data, data.info))
+		return (free_data(&data), ft_putstr("failed to init ressources"), 1);
 	mlx_loop_hook(data.mlx, animate_all, &data);
 	mlx_key_hook(data.win, handle_key_press, &data);
 	mlx_hook(data.win, 17, 0, close_window, &data);
 	mlx_loop(data.mlx);
-	return (cleanup_resources(&data) ,0);
-}
-
-void	cleanup_resources(t_data *data)
-{
-	// Free MLX images
-	// if (data->player.img)
-		mlx_destroy_image(data->mlx, data->player.img);
-	// if (data->enemy.img)
-		mlx_destroy_image(data->mlx, data->enemy.img);
-	// if (data->wall.img)
-		mlx_destroy_image(data->mlx, data->wall.img);
-	// if (data->coin.img)
-		mlx_destroy_image(data->mlx, data->coin.img);
-	// if (data->exit.img)
-		mlx_destroy_image(data->mlx, data->exit.img);
-	// if (data->frame.img)
-		// mlx_destroy_image(data->mlx, data->frame.img);
-	// if (data->floor.img)
-		mlx_destroy_image(data->mlx, data->floor.img);
-	// if (data->background.img)
-		mlx_destroy_image(data->mlx, data->background.img);
-	// Repeat for all sprite images
-
-	// Destroy window
-
-	mlx_destroy_window(data->mlx, data->win);
-	mlx_destroy_display(data->mlx);
-	free(data->mlx);
-	// free(data);
+	return (cleanup_resources(&data), 0);
 }
