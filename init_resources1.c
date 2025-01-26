@@ -1,23 +1,36 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_resources1.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abdel-ha <abdel-ha@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/24 15:37:06 by abdel-ha          #+#    #+#             */
+/*   Updated: 2025/01/26 09:48:59 by abdel-ha         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
 void	init_vars1(t_data *data)
 {
-	data->coin.addr = NULL;
-	data->coin.img = NULL;
-	data->player.addr = NULL;
-	data->player.img = NULL;
-	data->wall.addr = NULL;
-	data->wall.img = NULL;
-	data->floor.addr = NULL;
-	data->floor.img = NULL;
-	data->exit.addr = NULL;
-	data->exit.img = NULL;
-	data->background.addr = NULL;
-	data->background.img = NULL;
-	data->frame.addr = NULL;
-	data->frame.img = NULL;
-	data->enemy.addr = NULL;
-	data->enemy.img = NULL;
+	// data->coin.addr = NULL;
+	// data->coin.img = NULL;
+	// data->player.addr = NULL;
+	// data->player.img = NULL;
+	// data->wall.addr = NULL;
+	// data->wall.img = NULL;
+	// data->floor.addr = NULL;
+	// data->floor.img = NULL;
+	// data->exit.addr = NULL;
+	// data->exit.img = NULL;
+	// data->background.addr = NULL;
+	// data->background.img = NULL;
+	// data->frame.addr = NULL;
+	// data->frame.img = NULL;
+	// data->enemy.addr = NULL;
+	// data->enemy.img = NULL;
+	(void)data;
 }
 
 void	init_vars(t_data *data)
@@ -43,6 +56,7 @@ void	init_vars(t_data *data)
 	data->player.action = '0';
 	data->collected_coins = 0;
 	data->player.dir = 1;
+	data->enemy.dir = 1;
 }
 
 void	init_vars2(t_data *data)
@@ -60,5 +74,16 @@ void	init_vars2(t_data *data)
 	data->frame_nbr = 0;
 	data->enemy.frame_count = 12;
 	data->enemy.frame_index = 1;
+	
+}
+
+void    init_vars3(t_data *data)
+{
 	data->info->collide = 0;
+	data->info->count_coin = 0;
+	data->info->count_enemy = 0;
+	data->info->count_exit = 0;
+	data->info->count_Player = 0;
+	data->test_map = NULL;
+	data->map = NULL;
 }

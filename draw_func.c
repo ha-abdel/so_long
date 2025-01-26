@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   draw_func.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abdel-ha <abdel-ha@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/24 15:36:13 by abdel-ha          #+#    #+#             */
+/*   Updated: 2025/01/26 09:43:13 by abdel-ha         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
 void	fill_it(t_data *data, unsigned int color, int x, int y)
@@ -18,6 +30,7 @@ void	fill_it(t_data *data, unsigned int color, int x, int y)
 		color = get_color(&data->floor, x, y);
 		my_mlx_pixel_put(&data->frame, x, y, color);
 	}
+	free(count);
 }
 
 void	my_mlx_pixel_put(t_sprite *img, int x, int y, int color)
@@ -30,12 +43,16 @@ void	my_mlx_pixel_put(t_sprite *img, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-unsigned int	get_color(t_sprite *img, int x, int y)
+unsigned int get_color(t_sprite *img, int x, int y)
 {
-	int	offset;
+    if (x < 0 || y < 0 || x >= img->width || y >= img->height)
+        return 0;
 
-	offset = (y * img->line_len) + (x * (img->bpp / 8));
-	return (*(unsigned int *)(img->addr + offset));
+    int offset = (y * img->line_len) + (x * (img->bpp / 8));
+    if (offset < 0 || offset >= img->width * img->height * (img->bpp / 8))
+        return 0;
+
+    return *(unsigned int *)(img->addr + offset);
 }
 
 int	get_t(int trgb)

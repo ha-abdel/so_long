@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   draw_sprites.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abdel-ha <abdel-ha@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/24 15:36:19 by abdel-ha          #+#    #+#             */
+/*   Updated: 2025/01/24 15:36:20 by abdel-ha         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
-void	draw_player(t_data *data, t_validation_infos *info, int s_x, int s_y)
+void	draw_player(t_data *data, int s_x, int s_y)
 {
 	data->frame.img = mlx_new_image(data->mlx, FRAM_WIDTH, FRAM_WIDTH);
 	if (!data->frame.img)
@@ -19,7 +31,7 @@ void	draw_player(t_data *data, t_validation_infos *info, int s_x, int s_y)
 	mlx_destroy_image(data->mlx, data->frame.img);
 }
 
-void	draw_enemy(t_data *data, t_validation_infos *info, int s_x, int s_y)
+void	draw_enemy(t_data *data, int s_x, int s_y)
 {
 	data->frame.img = mlx_new_image(data->mlx, FRAM_WIDTH, FRAM_WIDTH);
 	if (!data->frame.img)
@@ -38,7 +50,7 @@ void	draw_enemy(t_data *data, t_validation_infos *info, int s_x, int s_y)
 	mlx_destroy_image(data->mlx, data->frame.img);
 }
 
-void	draw_wall(t_data *data, t_validation_infos *info, int s_x, int s_y)
+void	draw_wall(t_data *data, int s_x, int s_y)
 {
 	data->frame.img = mlx_new_image(data->mlx, FRAM_WIDTH, FRAM_WIDTH);
 	if (!data->frame.img)
@@ -54,7 +66,7 @@ void	draw_wall(t_data *data, t_validation_infos *info, int s_x, int s_y)
 	mlx_destroy_image(data->mlx, data->frame.img);
 }
 
-void	draw_floor(t_data *data, t_validation_infos *info, int s_x, int s_y)
+void	draw_floor(t_data *data, int s_x, int s_y)
 {
 	data->frame.img = mlx_new_image(data->mlx, FRAM_WIDTH, FRAM_WIDTH);
 	if (!data->frame.img)
@@ -70,7 +82,7 @@ void	draw_floor(t_data *data, t_validation_infos *info, int s_x, int s_y)
 	mlx_destroy_image(data->mlx, data->frame.img);
 }
 
-void	draw_moves(t_data *data, t_validation_infos *info, int s_x, int s_y)
+void	draw_moves(t_data *data, int s_x, int s_y)
 {
 	data->frame.img = mlx_new_image(data->mlx, FRAM_WIDTH, FRAM_WIDTH);
 	if (!data->frame.img)

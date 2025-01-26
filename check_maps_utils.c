@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_maps_utils.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abdel-ha <abdel-ha@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/24 15:35:52 by abdel-ha          #+#    #+#             */
+/*   Updated: 2025/01/26 09:21:59 by abdel-ha         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line.h"
 #include "so_long.h"
 
@@ -30,6 +42,16 @@ int	ft_check_helper(char **map, int len, int map_len)
 	return (1);
 }
 
+int	check_file_name(char *file_path)
+{
+	int    i;
+
+    i = ft_strlen(file_path) - 4;
+    if (i > 0 && ft_strncmp(file_path + i, ".ber", 4) == 0)
+        return (1);
+    return (0);
+}
+
 char	**get_map(char *file_path)
 {
 	char	**map;
@@ -37,7 +59,11 @@ char	**get_map(char *file_path)
 	int		i;
 	int		fd;
 
+    if (!check_file_name(file_path))
+		return (NULL);
 	map = malloc((get_map_len(file_path) + 1) * sizeof(char *));
+	if (!map)
+	    return (NULL);
 	fd = open(file_path, O_RDWR);
 	i = 0;
 	line = get_next_line(fd);
@@ -45,6 +71,7 @@ char	**get_map(char *file_path)
 	{
 		map[i] = ft_strdup(line);
 		i++;
+		free(line);
 		line = get_next_line(fd);
 	}
 	map[i] = NULL;
@@ -65,6 +92,7 @@ int	get_map_len(char *file_path)
 	while (line)
 	{
 		len++;
+		free(line);
 		line = get_next_line(fd);
 	}
 	free(line);
@@ -77,6 +105,7 @@ char	**dup_map(char **map)
 	int		len;
 	int		i;
 	char	**newmap;
+	char	*s;
 
 	len = 0;
 	i = 0;
@@ -91,7 +120,9 @@ char	**dup_map(char **map)
 		return (NULL);
 	while (map[i])
 	{
-		newmap[i] = ft_strdup(ft_strtrim(map[i], "\n"));
+		s = ft_strtrim(map[i], "\n");
+		newmap[i] = ft_strdup(s);
+		free(s);
 		i++;
 	}
 	newmap[i] = NULL;

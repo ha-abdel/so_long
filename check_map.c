@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_map.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abdel-ha <abdel-ha@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/24 15:35:41 by abdel-ha          #+#    #+#             */
+/*   Updated: 2025/01/26 09:33:25 by abdel-ha         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 
 #include "so_long.h"
 
@@ -66,18 +78,7 @@ void	check_map_elements(char **map, t_data *data)
 	}
 }
 
-void	print_map(char **s)
-{
-	int	x;
 
-	x = 0;
-	while (s[x])
-	{
-		printf("%s\n", s[x]);
-		x++;
-	}
-	// printf("\n\n");
-}
 
 int	check_map(char **test_map, t_data *data)
 {
@@ -100,7 +101,9 @@ int	check_map(char **test_map, t_data *data)
 			if (ft_strchr("CEP", test_map[y][x++]))
 				return (0);
 		}
+		free(test_map[y]);
 		y++;
 	}
+	free(test_map);
 	return (1);
 }

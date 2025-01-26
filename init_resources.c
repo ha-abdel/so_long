@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_resources.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abdel-ha <abdel-ha@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/24 15:37:01 by abdel-ha          #+#    #+#             */
+/*   Updated: 2025/01/26 10:57:30 by abdel-ha         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 #include "string.h"
 
@@ -8,25 +20,24 @@ void	initialize_sprites(t_data *data)
 	init_vars(data);
 }
 
-void	initiallize_resources(t_data *data, t_validation_infos *info,
-		char **test_map)
+void	initiallize_resources(t_data *data, t_validation_infos *info)
 {
-	int	x;
-	int	y;
+	// int	x;
+	// int	y;
 
-	y = 0;
+	// y = 0;
 	data->mlx = mlx_init();
 	data->win = mlx_new_window(data->mlx, info->width * FRAM_WIDTH, info->height
 			* FRAM_WIDTH, "so_long!");
 	data->width = info->width;
 	data->height = info->height;
 	initialize_sprites(data);
-	init_images(data, info);
-	init_images1(data, info);
+	init_images(data);
+	init_images1(data);
 	render_map(data);
 }
 
-void	init_images(t_data *data, t_validation_infos *info)
+void	init_images(t_data *data)
 {
 	data->player.img = mlx_xpm_file_to_image(data->mlx, "textures/Run.xpm",
 			&data->player.width, &data->player.height);
@@ -46,7 +57,7 @@ void	init_images(t_data *data, t_validation_infos *info)
 			&data->floor.line_len, &data->floor.endian);
 }
 
-void	init_images1(t_data *data, t_validation_infos *info)
+void	init_images1(t_data *data)
 {
 	data->coin.img = mlx_xpm_file_to_image(data->mlx, "textures/money4.xpm",
 			&data->coin.width, &data->coin.height);
@@ -64,6 +75,8 @@ void	init_images1(t_data *data, t_validation_infos *info)
 			&data->moves_container.endian);
 	data->background.img = mlx_new_image(data->mlx, data->info->width
 			* FRAM_WIDTH, data->info->height * FRAM_WIDTH);
+	// data->background.img = mlx_xpm_file_to_image(data->mlx, "textures/11zon_converted/castle_4_11zon.xpm",
+	// 		&data->background.width, &data->background.height);
 	data->background.addr = mlx_get_data_addr(data->background.img,
 			&data->background.bpp, &data->background.line_len,
 			&data->background.endian);

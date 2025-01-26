@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   draw_sprites1.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abdel-ha <abdel-ha@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/24 15:36:25 by abdel-ha          #+#    #+#             */
+/*   Updated: 2025/01/24 15:36:26 by abdel-ha         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
-void	draw_coin(t_data *data, t_validation_infos *info, int s_x, int s_y)
+void	draw_coin(t_data *data, int s_x, int s_y)
 {
 	data->frame.img = mlx_new_image(data->mlx, 100, 100);
 	if (!data->frame.img)
@@ -16,7 +28,7 @@ void	draw_coin(t_data *data, t_validation_infos *info, int s_x, int s_y)
 	mlx_destroy_image(data->mlx, data->frame.img);
 }
 
-void	draw_exit(t_data *data, t_validation_infos *info, int s_x, int s_y)
+void	draw_exit(t_data *data, int s_x, int s_y)
 {
 	data->frame.img = mlx_new_image(data->mlx, 100, 100);
 	if (!data->frame.img)
@@ -32,7 +44,7 @@ void	draw_exit(t_data *data, t_validation_infos *info, int s_x, int s_y)
 	mlx_destroy_image(data->mlx, data->frame.img);
 }
 
-void	draw_bg(t_data *data, t_validation_infos *info, int s_x, int s_y)
+void	draw_bg(t_data *data, int s_x, int s_y)
 {
 	mlx_put_image_to_window(data->mlx, data->win, data->background.img, s_x,
 		s_y);
