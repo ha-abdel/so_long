@@ -6,7 +6,7 @@
 /*   By: abdel-ha <abdel-ha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 15:36:25 by abdel-ha          #+#    #+#             */
-/*   Updated: 2025/01/26 11:18:13 by abdel-ha         ###   ########.fr       */
+/*   Updated: 2025/01/27 16:02:09 by abdel-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,12 @@ void	draw_exit(t_data *data, int s_x, int s_y)
 
 void	draw_bg(t_data *data, int s_x, int s_y)
 {
+	if (!data->win)
+	{
+		ft_putstr("Error\n Failed to create window.");
+		cleanup_resources(data);
+		exit(1);
+	}
 	mlx_put_image_to_window(data->mlx, data->win, data->background.img, s_x,
 		s_y);
 }

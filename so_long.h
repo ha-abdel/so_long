@@ -6,7 +6,7 @@
 /*   By: abdel-ha <abdel-ha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 15:37:28 by abdel-ha          #+#    #+#             */
-/*   Updated: 2025/01/26 12:18:55 by abdel-ha         ###   ########.fr       */
+/*   Updated: 2025/01/27 16:03:13 by abdel-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # define FRAM_WIDTH 100
 
 # include "get_next_line.h"
-# include </home/abdel-ha/Downloads/minilibx-linux/mlx.h>
+# include <mlx.h>
 # include <errno.h>
 # include <fcntl.h>
 # include <math.h>

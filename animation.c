@@ -6,7 +6,7 @@
 /*   By: abdel-ha <abdel-ha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 15:35:32 by abdel-ha          #+#    #+#             */
-/*   Updated: 2025/01/26 16:00:34 by abdel-ha         ###   ########.fr       */
+/*   Updated: 2025/01/27 16:15:18 by abdel-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	animate_door(t_data *data)
 
 	if (data->exit.frame_index >= 9)
 		return (1);
-	if (frame_timer++ >= 2)
+	if (frame_timer++ >= 1)
 	{
 		frame_timer = 0;
 		data->exit.frame_index++;
@@ -32,7 +32,7 @@ int	animate_enemy(t_data *data)
 
 	if (data->enemy.frame_index >= 12)
 		data->enemy.frame_index = 0;
-	if (frame_timer++ >= 7)
+	if (frame_timer++ >= 0)
 	{
 		frame_timer = 0;
 		data->enemy.frame_index++;

@@ -6,11 +6,10 @@
 /*   By: abdel-ha <abdel-ha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 15:37:23 by abdel-ha          #+#    #+#             */
-/*   Updated: 2025/01/26 15:49:02 by abdel-ha         ###   ########.fr       */
+/*   Updated: 2025/01/27 16:24:58 by abdel-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
 #include "so_long.h"
 
 void	check_enemy_next(t_data *data, int *new_x, int *new_y)
@@ -73,13 +72,20 @@ void	move_enemy(t_data *data)
 
 int	animate_all(t_data *data)
 {
+	static int	frame_timer = 0;
+
+	if (frame_timer++ >= 3)
+	{
+		frame_timer = 0;
+		move_enemy(data);
+	}
 	handle_action(data);
 	if (!data)
 		return (1);
 	if (data->collected_coins == data->info->count_coin)
 		animate_door(data);
 	animate_player(data);
-	move_enemy(data);
+	animate_enemy(data);
 	render_map(data);
 	return (0);
 }
@@ -113,7 +119,7 @@ int	main(int ac, char **av)
 	t_data	data;
 
 	if (ac != 2)
-		return (ft_putstr("expected args : so_long maps/map.ber"), 1);
+		return (ft_putstr("Error\nexpected : so_long maps/map.ber"), 1);
 	data.info = ft_calloc(1, sizeof(t_validation_infos));
 	if (data.info == NULL)
 		return (1);
@@ -125,10 +131,10 @@ int	main(int ac, char **av)
 	if (!data.test_map)
 		return (free_data(&data), 1);
 	if (!check_map(data.test_map, &data))
-		return (free_data(&data), ft_putstr("map is invalid"), 1);
+		return (free_data(&data), ft_putstr("Error\nmap is invalid"), 1);
 	data.test_map = dup_map(data.map);
 	if (initiallize_resources(&data, data.info))
-		return (free_data(&data), ft_putstr("failed to init ressources"), 1);
+		return (cleanup_resources(&data), ft_putstr("Error\ninit failure"), 1);
 	mlx_loop_hook(data.mlx, animate_all, &data);
 	mlx_key_hook(data.win, handle_key_press, &data);
 	mlx_hook(data.win, 17, 0, close_window, &data);

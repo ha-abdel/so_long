@@ -6,7 +6,7 @@
 /*   By: abdel-ha <abdel-ha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 15:37:01 by abdel-ha          #+#    #+#             */
-/*   Updated: 2025/01/26 18:28:25 by abdel-ha         ###   ########.fr       */
+/*   Updated: 2025/01/27 15:19:19 by abdel-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,12 @@ int	initiallize_resources(t_data *data, t_validation_infos *info)
 		return (1);
 	data->win = mlx_new_window(data->mlx, info->width * FRAM_WIDTH, info->height
 			* FRAM_WIDTH, "so_long!");
-	if (data->win == NULL)
-		return (1);
+	if (!data->win)
+	{
+		ft_putstr("Error\n map is too big");
+		cleanup_resources(data);
+		exit(1);
+	}
 	data->width = info->width;
 	data->height = info->height;
 	initialize_sprites(data);
@@ -41,18 +45,25 @@ void	init_images(t_data *data)
 {
 	data->player.img = mlx_xpm_file_to_image(data->mlx, "textures/Run.xpm",
 			&data->player.width, &data->player.height);
-	data->player.addr = mlx_get_data_addr(data->player.img, &data->player.bpp,
-			&data->player.line_len, &data->player.endian);
 	data->enemy.img = mlx_xpm_file_to_image(data->mlx, "textures/enemy.xpm",
 			&data->enemy.width, &data->enemy.height);
-	data->enemy.addr = mlx_get_data_addr(data->enemy.img, &data->enemy.bpp,
-			&data->enemy.line_len, &data->enemy.endian);
 	data->wall.img = mlx_xpm_file_to_image(data->mlx, "textures/wall22.xpm",
 			&data->wall.width, &data->wall.height);
-	data->wall.addr = mlx_get_data_addr(data->wall.img, &data->wall.bpp,
-			&data->wall.line_len, &data->wall.endian);
 	data->floor.img = mlx_xpm_file_to_image(data->mlx, "textures/floor5.xpm",
 			&data->floor.width, &data->floor.height);
+	if (!data->player.img || !data->enemy.img || !data->wall.img
+		|| !data->floor.img)
+	{
+		ft_putstr("Error\nFailed to load textures.\n");
+		cleanup_resources(data);
+		exit(1);
+	}
+	data->player.addr = mlx_get_data_addr(data->player.img, &data->player.bpp,
+			&data->player.line_len, &data->player.endian);
+	data->enemy.addr = mlx_get_data_addr(data->enemy.img, &data->enemy.bpp,
+			&data->enemy.line_len, &data->enemy.endian);
+	data->wall.addr = mlx_get_data_addr(data->wall.img, &data->wall.bpp,
+			&data->wall.line_len, &data->wall.endian);
 	data->floor.addr = mlx_get_data_addr(data->floor.img, &data->floor.bpp,
 			&data->floor.line_len, &data->floor.endian);
 }

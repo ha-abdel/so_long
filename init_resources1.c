@@ -6,7 +6,7 @@
 /*   By: abdel-ha <abdel-ha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 15:37:06 by abdel-ha          #+#    #+#             */
-/*   Updated: 2025/01/26 11:41:19 by abdel-ha         ###   ########.fr       */
+/*   Updated: 2025/01/27 15:00:07 by abdel-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,13 @@ void	init_vars3(t_data *data)
 	data->info->count_player = 0;
 	data->test_map = NULL;
 	data->map = NULL;
+	data->coin.img = NULL;
+	data->player.img = NULL;
+	data->wall.img = NULL;
+	data->floor.img = NULL;
+	data->exit.img = NULL;
+	data->background.img = NULL;
+	data->frame.img = NULL;
+	data->enemy.img = NULL;
+	data->moves_container.img = NULL;
 }

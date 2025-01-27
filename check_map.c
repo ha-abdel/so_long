@@ -6,7 +6,7 @@
 /*   By: abdel-ha <abdel-ha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 15:35:41 by abdel-ha          #+#    #+#             */
-/*   Updated: 2025/01/26 15:48:20 by abdel-ha         ###   ########.fr       */
+/*   Updated: 2025/01/27 16:01:56 by abdel-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,6 @@ int	check_map_walls(char **map, t_validation_infos *info)
 		map_len++;
 	info->width = len;
 	info->height = map_len;
-	if (info->width > 38 || info->height > 20)
-		return (0);
 	if (!ft_check_helper(map, len, map_len))
 		return (0);
 	return (1);
@@ -87,7 +85,7 @@ int	check_map(char **test_map, t_data *data)
 		return (0);
 	check_map_elements(test_map, data);
 	if (data->info->count_player != 1 || data->info->count_exit != 1
-		|| data->info->count_coin < 1)
+		|| data->info->count_coin < 1 || data->info->count_enemy > 1)
 		return (0);
 	flood_fill(test_map, data->info->px, data->info->py);
 	while (test_map[y])
@@ -99,8 +97,8 @@ int	check_map(char **test_map, t_data *data)
 				return (0);
 		}
 		free(test_map[y]);
+		test_map[y] = NULL;
 		y++;
 	}
-	free(test_map);
-	return (1);
+	return (free(test_map), test_map = NULL, 1);
 }
